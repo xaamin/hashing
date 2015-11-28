@@ -6,25 +6,13 @@ use Itnovado\Hashing\Contracts\HasherInterface;
 class Hash
 {
     /**
-     * Class constructor
-     * 
-     * @param Itnovado\Hashing\Contracts\HasherInterface|null $hasher
-     */
-    public function __construct(HasherInterface $hasher = null)
-    {
-        $hasher = $hasher ? : new BcryptHasher;
-
-        $this->setHasher($hasher);
-    }
-
-    /**
      * Sets a hasher strategy
      * 
      * @param Itnovado\Hashing\Contracts\HasherInterface $hasher
      */
-    public function setHasher(HasherInterface $hasher)
+    public static function setHasher(HasherInterface $hasher)
     {
-        $this->hasher = $hasher;
+        static::$hasher = $hasher;
     }
 
     /**
@@ -34,7 +22,12 @@ class Hash
      */
     public function getHasher()
     {
-        return $this->hasher;
+        if!(static::$hasher)
+        {
+            $this->setHasher(new BcryptHasher;);
+        }
+
+        return static::$hasher;
     }
 
     /**
@@ -44,8 +37,8 @@ class Hash
      * @param  array $parameters
      * @return mixed
      */
-    public function __call($method, $parameters)
+    public function __callStatic($method, $parameters)
     {
-        return call_user_func_array([$this->getHasher(), $method], $parameters);
+        return call_user_func_array([static::$getHasher(), $method], $parameters);
     }
 }

@@ -1,6 +1,6 @@
 <?php namespace Itnovado\Hashing\Contracts;
 
-interface HasherInterface
+interface HashInterface
 {
     /**
      * Hash the given value.
@@ -9,7 +9,7 @@ interface HasherInterface
      * @return string
      * @throws \RuntimeException
      */
-    public function hash($value);
+    public function make($value);
 
     /**
      * Checks the string against the hashed value.

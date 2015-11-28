@@ -1,9 +1,9 @@
 <?php namespace Itnovado\Hashing\Strategies;
 
 use Itnovado\Hashing\Traits\Hasher;
-use Itnovado\Hashing\Contracts\HasherInterface;
+use Itnovado\Hashing\Contracts\HashInterface;
 
-class BcryptHasher implements HasherInterface
+class BcryptHash implements HasherInterface
 {
     use Hasher;
 
@@ -17,7 +17,7 @@ class BcryptHasher implements HasherInterface
     /**
      * {@inheritDoc}
      */
-    public function hash($value)
+    public function make($value)
     {
         $salt = $this->createSalt();
 

@@ -1,14 +1,14 @@
 <?php namespace Itnovado\Hashing\Strategies;
 
 use RuntimeException;
-use Itnovado\Hashing\Contracts\HasherInterface;
+use Itnovado\Hashing\Contracts\HashInterface;
 
-class NativeHasher implements HasherInterface
+class NativeHash implements HasherInterface
 {
     /**
      * {@inheritDoc}
      */
-    public function hash($value)
+    public function make($value)
     {
         if (!$hash = password_hash($value, PASSWORD_DEFAULT)) 
         {

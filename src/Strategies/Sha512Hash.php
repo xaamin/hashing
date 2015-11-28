@@ -1,16 +1,16 @@
 <?php namespace Itnovado\Hashing\Strategies;
 
 use Itnovado\Hashing\Traits\Hasher;
-use Itnovado\Hashing\Contracts\HasherInterface;
+use Itnovado\Hashing\Contracts\HashInterface;
 
-class Sha512Hasher implements HasherInterface
+class Sha512Hash implements HasherInterface
 {
     use Hasher;
 
     /**
      * {@inheritDoc}
      */
-    public function hash($value)
+    public function make($value)
     {
         $salt = $this->createSalt();
 
