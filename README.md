@@ -30,7 +30,7 @@ The check method allows you to verify that a given plain-text string corresponds
 
 ```
 
-The Hasher uses the Bcrypt hashing algorithm. It is a safe algorithm to use, however this hasher has been deprecated in favor of the native hasher as it provides a uniform API to whatever the chosen hashing strategy of the day is.
+The Hasher uses the Bcrypt hashing algorithm. It is a safe algorithm to use, however this hasher has been deprecated in favor of the native hasher as it provides a uniform API to whatever the chosen hashing strategy of the day is (Requires PHP 5 >= 5.5.0).
 
 ```
    Hash::setHasher(new Xaamin\Hashing\Strategies\NativeHash);
