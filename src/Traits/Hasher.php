@@ -16,11 +16,61 @@ trait Hasher
      */
     protected function createSalt()
     {
-        if(function_exists('mcrypt_create_iv'))
+        if($salt = $this->createOpenSSLSalt())
         {
-            return mcrypt_create_iv($this->saltLength, $this->getRandomizer());
+            return $salt;
         }
 
+        if($salt = $this->createMCryptSalt())
+        {
+            return $salt;
+        }        
+
+        return $this->createRandomSalt();
+    }
+
+    /**
+     * Open SSL random string generator
+     * 
+     * @return string|null
+     */
+    protected function createOpenSSLSalt()
+    {
+        if(function_exists('openssl_random_pseudo_bytes'))
+        {
+            return substr(bin2hex(openssl_random_pseudo_bytes($this->saltLength)), 0, $this->saltLength);
+        }
+
+        return null;
+    }
+
+    /**
+     * MCrypt random string generator
+     * 
+     * @return string|null
+     */
+    protected function createMCryptSalt()
+    {
+        if(function_exists('mcrypt_create_iv'))
+        {
+            $salt = mcrypt_create_iv($this->saltLength, $this->getRandomizer());
+
+            $salt = base64_encode($salt);
+            $salt = substr(str_replace('+', '.', $salt), 0, $this->saltLength);
+
+            return $salt;
+        }
+
+        return null;
+    }
+
+    /**
+     * Random string generator
+     * 
+     * @return string
+     */
+    public function createRandomSalt()
+    {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $this->saltLength);

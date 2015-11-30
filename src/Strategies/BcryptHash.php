@@ -3,7 +3,7 @@
 use Itnovado\Hashing\Traits\Hasher;
 use Itnovado\Hashing\Contracts\HashInterface;
 
-class BcryptHash implements HasherInterface
+class BcryptHash implements HashInterface
 {
     use Hasher;
 
@@ -20,11 +20,11 @@ class BcryptHash implements HasherInterface
     public function make($value)
     {
         $salt = $this->createSalt();
-
+        
         // Prefix "$2y$" fixes blowfish weakness
         $prefix = '$2y$';
 
-        return crypt($value, $prefix.$this->strength.'$'.$salt.'$');
+        return crypt($value, $prefix . $this->strength . '$' . $salt . '$');
     }
 
     /**

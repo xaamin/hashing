@@ -3,7 +3,7 @@
 use Itnovado\Hashing\Traits\Hasher;
 use Itnovado\Hashing\Contracts\HashInterface;
 
-class Sha512Hash implements HasherInterface
+class Sha512Hash implements HashInterface
 {
     use Hasher;
 

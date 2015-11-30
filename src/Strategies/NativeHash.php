@@ -3,7 +3,7 @@
 use RuntimeException;
 use Itnovado\Hashing\Contracts\HashInterface;
 
-class NativeHash implements HasherInterface
+class NativeHash implements HashInterface
 {
     /**
      * {@inheritDoc}
