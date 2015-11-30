@@ -30,9 +30,9 @@ The check method allows you to verify that a given plain-text string corresponds
 
 ```
 
-The Hasher uses the Bcrypt hashing algorithm. It is a safe algorithm to use, however this hasher has been deprecated in favor of the native hasher as it provides a uniform API to whatever the chosen hashing strategy of the day is (Requires PHP 5 >= 5.5.0).
+By defautl this package uses the default PHP native hash implementation, it's the most secure way to hashing passwords and requires PHP 5 >= 5.5.0. Anyway, if you have PHP 5 < 5.5.0 you can use Bcrypt hashing algorithm. I suggest enable mcrypt or openssl PHP extension to generate secure random salt.
 
 ```
-   Hash::setHasher(new Xaamin\Hashing\Strategies\NativeHash);
+   Hash::setHasher(new Xaamin\Hashing\Strategies\BcryptHash);
 
 ```
