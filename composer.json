@@ -20,7 +20,7 @@
     },
     "suggest": {
         "ext-mcrypt": "Required for more secure salt on hashes.",
-        "ext-openssl": "Required for more secure salt on hashes.",
+        "ext-openssl": "Required for more secure salt on hashes."
     },
     "autoload": {
         "psr-4": {
