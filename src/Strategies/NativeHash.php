@@ -1,7 +1,8 @@
-<?php namespace Itnovado\Hashing\Strategies;
+<?php 
+namespace Xaamin\Hashing\Strategies;
 
 use RuntimeException;
-use Itnovado\Hashing\Contracts\HashInterface;
+use Xaamin\Hashing\Contracts\HashInterface;
 
 class NativeHash implements HashInterface
 {

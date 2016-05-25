@@ -1,4 +1,5 @@
-<?php namespace Itnovado\Hashing\Contracts;
+<?php 
+namespace Xaamin\Hashing\Contracts;
 
 interface HashInterface
 {

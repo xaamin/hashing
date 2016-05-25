@@ -1,7 +1,9 @@
-<?php namespace Itnovado\Hashing\Strategies;
+<?php 
+namespace Xaamin\Hashing\Strategies;
 
-use Itnovado\Hashing\Traits\Hasher;
-use Itnovado\Hashing\Contracts\HashInterface;
+use Xaamin\Hashing\Random;
+use Xaamin\Hashing\Traits\Hasher;
+use Xaamin\Hashing\Contracts\HashInterface;
 
 class Sha512Hash implements HashInterface
 {
@@ -12,7 +14,7 @@ class Sha512Hash implements HashInterface
      */
     public function make($value)
     {
-        $salt = $this->createSalt();
+        $salt = Random::string($this->saltLength);
 
         return $salt.hash('sha512', $salt.$value);
     }

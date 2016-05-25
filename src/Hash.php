@@ -1,21 +1,23 @@
-<?php namespace Itnovado\Hashing;
+<?php 
+namespace Xaamin\Hashing;
 
-use Itnovado\Hashing\Strategies\NativeHash;
-use Itnovado\Hashing\Contracts\HashInterface;
+use Xaamin\Hashing\Strategies\BcryptHash;
+use Xaamin\Hashing\Strategies\NativeHash;
+use Xaamin\Hashing\Contracts\HashInterface;
 
 class Hash
 {
     /**
      * Hasher strategy instance
      * 
-     * @var \Itnovado\Hashing\Contracts\HasherInterface
+     * @var \Xaamin\Hashing\Contracts\HasherInterface
      */
     protected static $hasher;
 
     /**
      * Sets a hasher strategy
      * 
-     * @param Itnovado\Hashing\Contracts\HasherInterface $hasher
+     * @param Xaamin\Hashing\Contracts\HasherInterface $hasher
      */
     public static function setHasher(HashInterface $hasher)
     {
@@ -25,13 +27,17 @@ class Hash
     /**
      * Get the hasher strategy used by this package
      * 
-     * @return Itnovado\Hashing\Contracts\HasherInterface
+     * @return Xaamin\Hashing\Contracts\HasherInterface
      */
     public static function getHasher()
     {
-        if(!static::$hasher)
-        {
-            static::setHasher(new NativeHash);
+        if (!static::$hasher) { 
+            if (function_exists('password_hash')) {
+                static::setHasher(new NativeHash);
+            } else {
+                static::setHasher(new BcryptHash);
+            }
+            
         }
 
         return static::$hasher;

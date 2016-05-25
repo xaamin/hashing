@@ -1,7 +1,9 @@
-<?php namespace Itnovado\Hashing\Strategies;
+<?php 
+namespace Xaamin\Hashing\Strategies;
 
-use Itnovado\Hashing\Traits\Hasher;
-use Itnovado\Hashing\Contracts\HashInterface;
+use Xaamin\Hashing\Random;
+use Xaamin\Hashing\Traits\Hasher;
+use Xaamin\Hashing\Contracts\HashInterface;
 
 class BcryptHash implements HashInterface
 {
@@ -19,7 +21,7 @@ class BcryptHash implements HashInterface
      */
     public function make($value)
     {
-        $salt = $this->createSalt();
+        $salt = Random::string($this->saltLength);
         
         // Prefix "$2y$" fixes blowfish weakness
         $prefix = '$2y$';
